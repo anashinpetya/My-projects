@@ -1,0 +1,198 @@
+CREATE SCHEMA proj;
+
+CREATE TABLE proj.bike_share_docks(x double precision,
+					 y double precision,
+					 id integer PRIMARY KEY,
+					 rataste_arv integer,
+					 nimi varchar(256),
+					 staatus integer,
+					 linnaosa integer
+					 );
+
+CREATE TABLE proj.tartu_pop_grid(
+					 geom_text text,
+					 id integer PRIMARY KEY,
+					 total_population integer
+					 );
+
+CREATE TABLE proj.tartu_neighbourhoods(
+					 id integer PRIMARY KEY,
+					 geom_text text,
+					 name varchar(256),
+					 place varchar(256),
+					 type varchar(256),
+					 population integer
+					 );
+
+CREATE TABLE proj.bike_routes(
+					 id integer PRIMARY KEY,
+					 unlock_date DATE,
+					 unlock_time TIME,
+					 lock_date DATE,
+					 lock_time TIME,
+					 membership VARCHAR(256),
+					 length DECIMAL(10,3),
+					 duration DECIMAL(10,3),
+					 bike_no INTEGER,
+					 bike_type VARCHAR(256),
+				 	 cost DECIMAL(10,3),
+					 start_station VARCHAR(256),
+					 end_station VARCHAR(256)
+					 );
+
+ALTER TABLE proj.tartu_pop_grid
+ADD COLUMN geom geometry(MULTIPOLYGON,4326);
+
+UPDATE proj.tartu_pop_grid SET
+  geom = ST_GeomFromText(geom_text,4326);
+
+ALTER TABLE proj.tartu_pop_grid
+DROP COLUMN geom_text;
+
+ALTER TABLE proj.tartu_neighbourhoods
+ADD COLUMN geom geometry(MULTIPOLYGON,4326);
+
+UPDATE proj.tartu_neighbourhoods SET
+  geom = ST_GeomFromText(geom_text,4326);
+
+ALTER TABLE proj.tartu_neighbourhoods
+DROP COLUMN geom_text;
+
+SELECT AddGeometryColumn('proj', 'bike_share_docks', 'geom', 3301, 'POINT', 2);
+
+UPDATE proj.bike_share_docks SET geom = ST_GeomFromText('POINT('||x||' '||y||')', 3301);
+
+--additional table to create many to many relationship between bike_routes and bike_share_docks
+CREATE TABLE proj.bike_docks_routes(
+					 id serial PRIMARY KEY,
+					 dock_id integer,
+					 route_id integer
+					 );
+
+--create many to many relationship between bike_routes and bike_share_docks
+SELECT proj.bike_share_docks.id as dock_id, proj.bike_routes.id as route_id FROM proj.bike_share_docks, proj.bike_routes;
+
+INSERT INTO proj.bike_docks_routes (dock_id, route_id)
+SELECT proj.bike_share_docks.id as dock_id, proj.bike_routes.id as route_id FROM proj.bike_share_docks, proj.bike_routes;
+
+ALTER TABLE proj.bike_docks_routes ADD CONSTRAINT fk_dock_id FOREIGN KEY (dock_id) REFERENCES proj.bike_share_docks (id); 
+
+ALTER TABLE proj.bike_docks_routes ADD CONSTRAINT fk_route_id FOREIGN KEY (route_id) REFERENCES proj.bike_routes (id);
+
+--change CRS to Estonian coord system 
+ALTER TABLE proj.tartu_pop_grid
+ALTER COLUMN geom
+TYPE Geometry(MULTIPOLYGON, 3301)
+USING ST_Transform(geom, 3301);
+
+ALTER TABLE proj.tartu_neighbourhoods
+ALTER COLUMN geom
+TYPE Geometry(MULTIPOLYGON, 3301)
+USING ST_Transform(geom, 3301);
+
+--geometry validation
+SELECT COUNT(ST_IsValid(geom)='true') AS valid, COUNT(id) AS all_polygons FROM 
+proj.tartu_pop_grid;
+
+SELECT COUNT(ST_IsValid(geom)='true') AS valid, COUNT(id) AS all_polygons FROM 
+proj.tartu_neighbourhoods;
+
+SELECT COUNT(ST_IsValid(geom)='true') AS valid, COUNT(id) AS all_polygons FROM 
+proj.bike_share_docks;
+
+--drop unnecessary columns
+ALTER TABLE proj.bike_share_docks
+	DROP COLUMN x,
+	DROP COLUMN y,
+	DROP COLUMN staatus,
+	DROP COLUMN linnaosa;
+
+ALTER TABLE proj.tartu_neighbourhoods
+	DROP COLUMN place,
+	DROP COLUMN type,
+	DROP COLUMN population;
+
+--how many bike stations are within the city and 600 meters to the city?
+--Tartu borders
+CREATE VIEW proj.tartu_borders AS
+SELECT ST_Union(a.geom) AS geom FROM proj.tartu_neighbourhoods as a;
+
+--number of bike sharing stations located in Tartu and 600m to the city 
+SELECT COUNT(b.*)
+FROM proj.tartu_borders as a, proj.bike_share_docks as b
+WHERE ST_DWithin(a.geom, b.geom, 600);
+
+--how many bike stations there are in each neighbourhood
+CREATE VIEW proj.neighbourhood_docks_number AS
+SELECT a.name, COUNT(a.name), a.geom
+FROM proj.tartu_neighbourhoods as a, proj.bike_share_docks as b
+WHERE ST_Contains(a.geom, b.geom) IS TRUE
+GROUP BY a.name, a.geom ORDER BY COUNT(a.name) DESC;
+
+--how many times bike sharing stations have been used in each neighbourhood
+
+--count number of usages of each station
+CREATE VIEW proj.dock_usages_number AS
+SELECT bike_docks.nimi as dock_name, COUNT(bike_docks.nimi), bike_docks.geom
+FROM proj.bike_share_docks as bike_docks
+LEFT JOIN proj.bike_docks_routes as docks_routes
+ON bike_docks.id = docks_routes.dock_id
+LEFT JOIN proj.bike_routes as bike_routes
+ON docks_routes.route_id = bike_routes.id
+WHERE bike_docks.nimi=bike_routes.start_station
+GROUP BY bike_docks.nimi, bike_docks.geom ORDER BY COUNT(bike_docks.nimi) DESC;
+
+--count number of bike sharing usages per each neighbourhood
+CREATE VIEW proj.neighbourhood_usages_number AS
+SELECT a.name, SUM(b.count), a.geom
+FROM proj.tartu_neighbourhoods as a, proj.dock_usages_number as b
+WHERE ST_Contains(a.geom, b.geom) IS TRUE
+GROUP BY a.name, a.geom ORDER BY SUM(b.count) DESC;
+
+--calculate accessibility index for each population grid cell
+
+--create buffers around centroids of pop grid cells
+CREATE VIEW proj.pop_grid_buffers AS
+SELECT a.id AS cell_id, a.total_population, ST_Buffer(ST_Centroid(a.geom), 600) AS geom FROM proj.tartu_pop_grid AS a;
+
+--number of bikes available within each buffer around centroids of population grid
+CREATE VIEW proj.bikes_number AS
+SELECT a.cell_id, SUM(b.rataste_arv) AS bikes_number, a.geom
+FROM proj.pop_grid_buffers as a, proj.bike_share_docks as b
+WHERE ST_Contains(a.geom, b.geom) IS TRUE
+GROUP BY a.cell_id, a.geom ORDER BY SUM(b.rataste_arv) DESC;
+
+--population number within each buffer
+CREATE VIEW proj.pop_grid_population_buff AS
+SELECT a.cell_id, SUM(b.total_population) as total_population, a.geom
+FROM proj.pop_grid_buffers as a, proj.tartu_pop_grid as b
+WHERE ST_Contains(a.geom, ST_Centroid(b.geom)) IS TRUE
+GROUP BY a.cell_id, a.geom ORDER BY SUM(b.total_population) DESC;
+
+--create table from view to improve performance 
+CREATE TABLE proj.table_pop_grid_population_buff AS SELECT * FROM proj.pop_grid_population_buff;
+
+--join information about total population within 600m buffer around each cell and number of bikes
+--calculate accessibility index as total number of bikes / total population
+CREATE VIEW proj.accessibility_index AS 
+SELECT a.id, b.total_population, c.bikes_number, CAST(c.bikes_number AS float)/CAST(NULLIF(b.total_population,0) AS float) as accessibility_index, a.geom
+FROM proj.tartu_pop_grid AS a
+LEFT JOIN proj.table_pop_grid_population_buff AS b
+ON a.id = b.cell_id
+LEFT JOIN proj.bikes_number AS c
+ON b.cell_id = c.cell_id;
+
+--mean accessibility index in each neighbourhood
+CREATE VIEW proj.neighbourhoods_accessibility AS 
+SELECT a.name, AVG(b.accessibility_index), a.geom
+FROM proj.tartu_neighbourhoods as a, proj.accessibility_index as b
+WHERE ST_Within(ST_Centroid(b.geom), a.geom) IS TRUE
+GROUP BY a.name, a.geom ORDER BY AVG(b.accessibility_index) DESC;
+
+--median accessibility index in each neighbourhood
+CREATE VIEW proj.neighbourhoods_median_accessibility AS 
+SELECT a.name, PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY b.accessibility_index), a.geom
+FROM proj.tartu_neighbourhoods as a, proj.accessibility_index as b
+WHERE ST_Within(ST_Centroid(b.geom), a.geom) IS TRUE
+GROUP BY a.name, a.geom;
+
