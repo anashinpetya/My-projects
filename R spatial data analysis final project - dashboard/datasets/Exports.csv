@@ -1,0 +1,186 @@
+Continent_ID,Continent,Region_ID,Region,Country_ID,Country,country_iso3,Year,Total,__time__
+1,Europe,1,Southern Europe,ad,Andorra,and,2021,66763,02/01/2021
+1,Europe,1,Southern Europe,al,Albania,alb,2021,1119665,02/01/2021
+1,Europe,1,Southern Europe,ba,Bosnia and Herzegovina,bih,2021,1144385,02/01/2021
+1,Europe,1,Southern Europe,es,Spain,esp,2021,141897510,02/01/2021
+1,Europe,1,Southern Europe,gi,Gibraltar,gib,2021,34318269,02/01/2021
+1,Europe,1,Southern Europe,gr,Greece,grc,2021,40282888,02/01/2021
+1,Europe,1,Southern Europe,hr,Croatia,hrv,2021,8376237,02/01/2021
+1,Europe,1,Southern Europe,it,Italy,ita,2021,210430570,02/01/2021
+1,Europe,1,Southern Europe,me,Montenegro,mne,2021,67455,02/01/2021
+1,Europe,1,Southern Europe,mk,Macedonia,mkd,2021,1637926,02/01/2021
+1,Europe,1,Southern Europe,mt,Malta,mlt,2021,20819556,02/01/2021
+1,Europe,1,Southern Europe,pt,Portugal,prt,2021,29424380,02/01/2021
+1,Europe,1,Southern Europe,rs,Serbia,srb,2021,12207160,02/01/2021
+1,Europe,1,Southern Europe,si,Slovenia,svn,2021,25466417,02/01/2021
+1,Europe,1,Southern Europe,sm,San Marino,smr,2021,64275,02/01/2021
+1,Europe,1,Southern Europe,xk,Kosovo,ksv,2021,694037,02/01/2021
+1,Europe,7,Western Europe,at,Austria,aut,2021,83999581,02/01/2021
+1,Europe,7,Western Europe,be,Belgium,bel,2021,237123067,02/01/2021
+1,Europe,7,Western Europe,ch,Switzerland,che,2021,189323399,02/01/2021
+1,Europe,7,Western Europe,de,Germany,deu,2021,1128294231,02/01/2021
+1,Europe,7,Western Europe,fr,France,fra,2021,354209220,02/01/2021
+1,Europe,7,Western Europe,li,Liechtenstein,lie,2021,347555,02/01/2021
+1,Europe,7,Western Europe,lu,Luxembourg,lux,2021,1778917,02/01/2021
+1,Europe,7,Western Europe,nl,Netherlands,nld,2021,1107862908,02/01/2021
+1,Europe,9,Eastern Europe,bg,Bulgaria,bgr,2021,85651556,02/01/2021
+1,Europe,9,Eastern Europe,by,Belarus,blr,2021,74235494,02/01/2021
+1,Europe,9,Eastern Europe,cz,Czechia,cze,2021,129547286,02/01/2021
+1,Europe,9,Eastern Europe,hu,Hungary,hun,2021,50186957,02/01/2021
+1,Europe,9,Eastern Europe,md,Moldova,mda,2021,6019924,02/01/2021
+1,Europe,9,Eastern Europe,pl,Poland,pol,2021,568637445,02/01/2021
+1,Europe,9,Eastern Europe,ro,Romania,rou,2021,43816967,02/01/2021
+1,Europe,9,Eastern Europe,ru,Russian Federation,rus,2021,769548277,02/01/2021
+1,Europe,9,Eastern Europe,sk,Slovakia,svk,2021,36524535,02/01/2021
+1,Europe,9,Eastern Europe,ua,Ukraine,ukr,2021,134202278,02/01/2021
+1,Europe,13,Northern Europe,dk,Denmark,dnk,2021,574100573,02/01/2021
+1,Europe,13,Northern Europe,fi,Finland,fin,2021,2620234199,02/01/2021
+1,Europe,13,Northern Europe,fo,Faroe Islands,fro,2021,506212,02/01/2021
+1,Europe,13,Northern Europe,gb,United Kingdom,gbr,2021,611919299,02/01/2021
+1,Europe,13,Northern Europe,ie,Ireland,irl,2021,32687723,02/01/2021
+1,Europe,13,Northern Europe,is,Iceland,isl,2021,42415959,02/01/2021
+1,Europe,13,Northern Europe,lt,Lithuania,ltu,2021,1050304751,02/01/2021
+1,Europe,13,Northern Europe,lv,Latvia,lva,2021,1831998634,02/01/2021
+1,Europe,13,Northern Europe,no,Norway,nor,2021,569791247,02/01/2021
+1,Europe,13,Northern Europe,se,Sweden,swe,2021,1673667817,02/01/2021
+2,Asia,2,Western Asia,ae,United Arab Emirates,are,2021,61889205,02/01/2021
+2,Asia,2,Western Asia,am,Armenia,arm,2021,1410110,02/01/2021
+2,Asia,2,Western Asia,az,Azerbaijan,aze,2021,2925348,02/01/2021
+2,Asia,2,Western Asia,bh,Bahrain,bhr,2021,2008857,02/01/2021
+2,Asia,2,Western Asia,cy,Cyprus,cyp,2021,9918875,02/01/2021
+2,Asia,2,Western Asia,ge,Georgia,geo,2021,4094070,02/01/2021
+2,Asia,2,Western Asia,il,Israel,isr,2021,43818443,02/01/2021
+2,Asia,2,Western Asia,iq,Iraq,irq,2021,1650014,02/01/2021
+2,Asia,2,Western Asia,jo,Jordan,jor,2021,3549370,02/01/2021
+2,Asia,2,Western Asia,kw,Kuwait,kwt,2021,2018013,02/01/2021
+2,Asia,2,Western Asia,lb,Lebanon,lbn,2021,838698,02/01/2021
+2,Asia,2,Western Asia,om,Oman,omn,2021,5723396,02/01/2021
+2,Asia,2,Western Asia,qa,Qatar,qat,2021,2567669,02/01/2021
+2,Asia,2,Western Asia,sa,Saudi Arabia,sau,2021,94702367,02/01/2021
+2,Asia,2,Western Asia,sy,Syrian Arab Republic,syr,2021,255431,02/01/2021
+2,Asia,2,Western Asia,tr,Turkey,tur,2021,179058784,02/01/2021
+2,Asia,2,Western Asia,ye,Yemen,yem,2021,323953,02/01/2021
+2,Asia,3,Southern Asia,af,Afghanistan,afg,2021,68989,02/01/2021
+2,Asia,3,Southern Asia,bd,Bangladesh,bgd,2021,402909,02/01/2021
+2,Asia,3,Southern Asia,in,India,ind,2021,97788783,02/01/2021
+2,Asia,3,Southern Asia,ir,Iran,irn,2021,3696748,02/01/2021
+2,Asia,3,Southern Asia,lk,Sri Lanka,lka,2021,1948037,02/01/2021
+2,Asia,3,Southern Asia,mv,Maldives,mdv,2021,155256,02/01/2021
+2,Asia,3,Southern Asia,np,Nepal,npl,2021,53721,02/01/2021
+2,Asia,3,Southern Asia,pk,Pakistan,pak,2021,4172853,02/01/2021
+2,Asia,11,South-eastern Asia,bn,Brunei Darussalam,brn,2021,91193,02/01/2021
+2,Asia,11,South-eastern Asia,id,Indonesia,idn,2021,5500943,02/01/2021
+2,Asia,11,South-eastern Asia,kh,Cambodia,khm,2021,2558222,02/01/2021
+2,Asia,11,South-eastern Asia,la,Lao People's Democratic Republic,lao,2021,22279,02/01/2021
+2,Asia,11,South-eastern Asia,mm,Myanmar,mmr,2021,178678,02/01/2021
+2,Asia,11,South-eastern Asia,my,Malaysia,mys,2021,11296288,02/01/2021
+2,Asia,11,South-eastern Asia,ph,Philippines,phl,2021,5178501,02/01/2021
+2,Asia,11,South-eastern Asia,sg,Singapore,sgp,2021,162343862,02/01/2021
+2,Asia,11,South-eastern Asia,th,Thailand,tha,2021,16847533,02/01/2021
+2,Asia,11,South-eastern Asia,vn,Viet Nam,vnm,2021,10056086,02/01/2021
+2,Asia,12,Eastern Asia,cn,China,chn,2021,194383784,02/01/2021
+2,Asia,12,Eastern Asia,hk,Hong Kong,hkg,2021,24653889,02/01/2021
+2,Asia,12,Eastern Asia,jp,Japan,jpn,2021,116907441,02/01/2021
+2,Asia,12,Eastern Asia,kr,South Korea,kor,2021,49584770,02/01/2021
+2,Asia,12,Eastern Asia,mn,Mongolia,mng,2021,14854242,02/01/2021
+2,Asia,12,Eastern Asia,mo,Macao,mac,2021,116025,02/01/2021
+2,Asia,12,Eastern Asia,tw,Taiwan,twn,2021,21374582,02/01/2021
+2,Asia,17,Central Asia,kg,Kyrgyzstan,kgz,2021,282688,02/01/2021
+2,Asia,17,Central Asia,kz,Kazakhstan,kaz,2021,11018399,02/01/2021
+2,Asia,17,Central Asia,tj,Tajikistan,tjk,2021,326959,02/01/2021
+2,Asia,17,Central Asia,tm,Turkmenistan,tkm,2021,304572,02/01/2021
+2,Asia,17,Central Asia,uz,Uzbekistan,uzb,2021,20102344,02/01/2021
+3,South America,4,Latin America and the Caribbean,ag,Antigua and Barbuda,atg,2021,1217,02/01/2021
+3,South America,4,Latin America and the Caribbean,ar,Argentina,arg,2021,9264011,02/01/2021
+3,South America,4,Latin America and the Caribbean,aw,Aruba,abw,2021,109530,02/01/2021
+3,South America,4,Latin America and the Caribbean,bb,Barbados,brb,2021,4013,02/01/2021
+3,South America,4,Latin America and the Caribbean,bl,Saint Barthélemy,blm,2021,749,02/01/2021
+3,South America,4,Latin America and the Caribbean,bo,Bolivia,bol,2021,2110916,02/01/2021
+3,South America,4,Latin America and the Caribbean,bq,Bonaire Sint Eustatius and Saba,bes,2021,118883,02/01/2021
+3,South America,4,Latin America and the Caribbean,br,Brazil,bra,2021,34661949,02/01/2021
+3,South America,4,Latin America and the Caribbean,bs,Bahamas,bhs,2021,25866,02/01/2021
+3,South America,4,Latin America and the Caribbean,bz,Belize,blz,2021,851,02/01/2021
+3,South America,4,Latin America and the Caribbean,cl,Chile,chl,2021,9174647,02/01/2021
+3,South America,4,Latin America and the Caribbean,co,Colombia,col,2021,1035968,02/01/2021
+3,South America,4,Latin America and the Caribbean,cr,Costa Rica,cri,2021,1846741,02/01/2021
+3,South America,4,Latin America and the Caribbean,cu,Cuba,cub,2021,2009849,02/01/2021
+3,South America,4,Latin America and the Caribbean,cw,Curaçao,cuw,2021,155158,02/01/2021
+3,South America,4,Latin America and the Caribbean,dm,Dominica,dma,2021,50714,02/01/2021
+3,South America,4,Latin America and the Caribbean,do,Dominican Republic,dom,2021,681947,02/01/2021
+3,South America,4,Latin America and the Caribbean,ec,Ecuador,ecu,2021,1112351,02/01/2021
+3,South America,4,Latin America and the Caribbean,gt,Guatemala,gtm,2021,4777669,02/01/2021
+3,South America,4,Latin America and the Caribbean,gy,Guyana,guy,2021,5059,02/01/2021
+3,South America,4,Latin America and the Caribbean,hn,Honduras,hnd,2021,1584791,02/01/2021
+3,South America,4,Latin America and the Caribbean,ht,Haiti,hti,2021,37869,02/01/2021
+3,South America,4,Latin America and the Caribbean,jm,Jamaica,jam,2021,294884,02/01/2021
+3,South America,4,Latin America and the Caribbean,ky,Cayman Islands,cym,2021,2440,02/01/2021
+3,South America,4,Latin America and the Caribbean,lc,Saint Lucia,lca,2021,1057,02/01/2021
+3,South America,4,Latin America and the Caribbean,mx,Mexico,mex,2021,30132778,02/01/2021
+3,South America,4,Latin America and the Caribbean,ni,Nicaragua,nic,2021,596263,02/01/2021
+3,South America,4,Latin America and the Caribbean,pa,Panama,pan,2021,268999,02/01/2021
+3,South America,4,Latin America and the Caribbean,pe,Peru,per,2021,4105438,02/01/2021
+3,South America,4,Latin America and the Caribbean,py,Paraguay,pry,2021,1363194,02/01/2021
+3,South America,4,Latin America and the Caribbean,sr,Suriname,sur,2021,487458,02/01/2021
+3,South America,4,Latin America and the Caribbean,sv,El Salvador,slv,2021,1122799,02/01/2021
+3,South America,4,Latin America and the Caribbean,sx,Sint Maarten (Dutch part),sxm,2021,104144,02/01/2021
+3,South America,4,Latin America and the Caribbean,tt,Trinidad and Tobago,tto,2021,108940,02/01/2021
+3,South America,4,Latin America and the Caribbean,uy,Uruguay,ury,2021,10746850,02/01/2021
+3,South America,4,Latin America and the Caribbean,ve,Venezuela,ven,2021,873811,02/01/2021
+4,Africa,5,Sub-Saharan Africa,ao,Angola,ago,2021,10144478,02/01/2021
+4,Africa,5,Sub-Saharan Africa,bf,Burkina Faso,bfa,2021,271493,02/01/2021
+4,Africa,5,Sub-Saharan Africa,bi,Burundi,bdi,2021,38184,02/01/2021
+4,Africa,5,Sub-Saharan Africa,bj,Benin,ben,2021,147989,02/01/2021
+4,Africa,5,Sub-Saharan Africa,bw,Botswana,bwa,2021,22720,02/01/2021
+4,Africa,5,Sub-Saharan Africa,cd,Congo (Democratic Republic of the),cod,2021,33690,02/01/2021
+4,Africa,5,Sub-Saharan Africa,cg,Congo,cog,2021,1499209,02/01/2021
+4,Africa,5,Sub-Saharan Africa,ci,Côte d'Ivoire,civ,2021,857295,02/01/2021
+4,Africa,5,Sub-Saharan Africa,cm,Cameroon,cmr,2021,204465,02/01/2021
+4,Africa,5,Sub-Saharan Africa,cv,Cabo Verde,cpv,2021,20790,02/01/2021
+4,Africa,5,Sub-Saharan Africa,dj,Djibouti,dji,2021,29698,02/01/2021
+4,Africa,5,Sub-Saharan Africa,et,Ethiopia,eth,2021,618539,02/01/2021
+4,Africa,5,Sub-Saharan Africa,ga,Gabon,gab,2021,13880,02/01/2021
+4,Africa,5,Sub-Saharan Africa,gh,Ghana,gha,2021,653718,02/01/2021
+4,Africa,5,Sub-Saharan Africa,gm,Gambia,gmb,2021,444838,02/01/2021
+4,Africa,5,Sub-Saharan Africa,gn,Guinea,gin,2021,25564,02/01/2021
+4,Africa,5,Sub-Saharan Africa,gq,Equatorial Guinea,gnq,2021,33484,02/01/2021
+4,Africa,5,Sub-Saharan Africa,gw,Guinea-Bissau,gnb,2021,6000,02/01/2021
+4,Africa,5,Sub-Saharan Africa,ke,Kenya,ken,2021,1255375,02/01/2021
+4,Africa,5,Sub-Saharan Africa,lr,Liberia,lbr,2021,283239,02/01/2021
+4,Africa,5,Sub-Saharan Africa,mg,Madagascar,mdg,2021,25297,02/01/2021
+4,Africa,5,Sub-Saharan Africa,ml,Mali,mli,2021,43227,02/01/2021
+4,Africa,5,Sub-Saharan Africa,mr,Mauritania,mrt,2021,368597,02/01/2021
+4,Africa,5,Sub-Saharan Africa,mu,Mauritius,mus,2021,76784,02/01/2021
+4,Africa,5,Sub-Saharan Africa,mw,Malawi,mwi,2021,208341,02/01/2021
+4,Africa,5,Sub-Saharan Africa,mz,Mozambique,moz,2021,6856083,02/01/2021
+4,Africa,5,Sub-Saharan Africa,na,Namibia,nam,2021,10316667,02/01/2021
+4,Africa,5,Sub-Saharan Africa,ne,Niger,ner,2021,5080,02/01/2021
+4,Africa,5,Sub-Saharan Africa,ng,Nigeria,nga,2021,55207967,02/01/2021
+4,Africa,5,Sub-Saharan Africa,rw,Rwanda,rwa,2021,832170,02/01/2021
+4,Africa,5,Sub-Saharan Africa,sc,Seychelles,syc,2021,22351,02/01/2021
+4,Africa,5,Sub-Saharan Africa,sl,Sierra Leone,sle,2021,190919,02/01/2021
+4,Africa,5,Sub-Saharan Africa,sn,Senegal,sen,2021,634871,02/01/2021
+4,Africa,5,Sub-Saharan Africa,so,Somalia,som,2021,69656,02/01/2021
+4,Africa,5,Sub-Saharan Africa,ss,South Sudan,ssd,2021,11000,02/01/2021
+4,Africa,5,Sub-Saharan Africa,sz,Eswatini,swz,2021,607200,02/01/2021
+4,Africa,5,Sub-Saharan Africa,tf,French Southern Territories,atf,2021,453440,02/01/2021
+4,Africa,5,Sub-Saharan Africa,tg,Togo,tgo,2021,23374717,02/01/2021
+4,Africa,5,Sub-Saharan Africa,tz,Tanzania,tza,2021,572149,02/01/2021
+4,Africa,5,Sub-Saharan Africa,ug,Uganda,uga,2021,1115061,02/01/2021
+4,Africa,5,Sub-Saharan Africa,za,South Africa,zaf,2021,10193760,02/01/2021
+4,Africa,5,Sub-Saharan Africa,zm,Zambia,zmb,2021,203559,02/01/2021
+4,Africa,5,Sub-Saharan Africa,zw,Zimbabwe,zwe,2021,33490,02/01/2021
+4,Africa,14,Northern Africa,dz,Algeria,dza,2021,12493458,02/01/2021
+4,Africa,14,Northern Africa,eg,Egypt,egy,2021,19787274,02/01/2021
+4,Africa,14,Northern Africa,ly,Libya,lby,2021,891401,02/01/2021
+4,Africa,14,Northern Africa,ma,Morocco,mar,2021,24216351,02/01/2021
+4,Africa,14,Northern Africa,sd,Sudan,sdn,2021,308627,02/01/2021
+4,Africa,14,Northern Africa,tn,Tunisia,tun,2021,839030,02/01/2021
+5,Oceania,6,Polynesia,pf,French Polynesia,pyf,2021,11356,02/01/2021
+5,Oceania,8,Australia and New Zealand,au,Australia,aus,2021,73973889,02/01/2021
+5,Oceania,8,Australia and New Zealand,nz,New Zealand,nzl,2021,8785477,02/01/2021
+5,Oceania,15,Melanesia,fj,Fiji,fji,2021,6616,02/01/2021
+5,Oceania,15,Melanesia,nc,New Caledonia,ncl,2021,243758,02/01/2021
+6,North America,10,Northern America,ca,Canada,can,2021,136626418,02/01/2021
+6,North America,10,Northern America,gl,Greenland,grl,2021,93320,02/01/2021
+6,North America,10,Northern America,us,United States of America,usa,2021,1673879497,02/01/2021
+9,Not Specified,21,Not Specified,xx,Not Specified,xxx,2021,289611358,02/01/2021
