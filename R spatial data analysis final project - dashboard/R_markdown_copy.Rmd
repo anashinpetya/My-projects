@@ -1,0 +1,213 @@
+---
+title: "Analysis of Estonian macro-economic indicators"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+setwd("C:/Python_and_R_for_spatial_data_analysis/R/R_final_project")
+
+#install.packages('WDI')
+#install.packages('flexdashboard')
+#install.packages("rmarkdown")
+#install.packages("highcharter")
+#install.packages("httr")
+#install.packages("geojsonio")
+#install.packages("geojsonsf")
+
+library(flexdashboard)
+library(highcharter)
+library(tidyverse)
+library(WDI)
+library(ggplot2)
+library(plotly)
+library(plyr)
+library(flexdashboard)
+library(tmap)
+library(sf)
+library(sp)
+library(leaflet)
+library(dplyr)
+library(httr)
+library(geojsonio)
+library(jsonlite)
+library(geojsonsf)
+
+
+#download data on Estonian GDP growth from World Bank database
+WDIsearch('GDP growth')
+
+#NY.GDP.MKTP.KD.ZG
+
+GDP_growth = WDI(indicator='NY.GDP.MKTP.KD.ZG', country=c('EST'), start=1996, end=2021)
+
+GDP_growth["GDP_growth_percents"] <- round(GDP_growth["NY.GDP.MKTP.KD.ZG"],digit=2)
+
+
+#line chart of Estonian GDP growth
+GDP_growth_h_linechart <- GDP_growth %>% hchart("line", hcaes(x = year, y = GDP_growth_percents),
+                      color="#5795CD", name="GDP growth",
+                      tooltip = list(
+      valueDecimals = 2,
+      valueSuffix = "%"
+  )) %>%
+   hc_xAxis(title = list(text = "Year")) %>%
+   hc_yAxis(title = list(text = "GDP growth, %"), min = -15, tickAmont = 5)
+
+GDP_growth_h_linechart
+
+
+
+
+
+#data on value added from Eesti Statistika: https://andmed.stat.ee/en/stat/majandus__rahvamajanduse-arvepidamine__sisemajanduse-koguprodukt-(skp)__sisemajanduse-koguprodukt-tootmise-meetodil/RAA0042
+value_added <- read.csv(file = 'datasets/VALUE_ADDED_by_Economic_activity.csv')
+
+class(value_added)
+
+glimpse(value_added)
+
+value_added <- value_added[order(value_added$Value_mln_eur, decreasing=TRUE),]
+
+#bar chart of value added
+value_added_h_plot <- value_added %>%
+  hchart("bar", name="Value added",
+         color = "#5795CD",
+         hcaes(x = Economic_activity, y = Value_mln_eur), tooltip = list(
+      valueDecimals = 1,
+      valueSuffix = " mln eur"
+  )) %>%
+  hc_xAxis(title = list(text = "Economic activity")) %>%
+   hc_yAxis(title = list(text = "Value added, mln eur"), max = 4000)
+
+value_added_h_plot
+
+
+
+
+
+#data on exports and imports from Eesti Statistika: https://valiskaubandus.stat.ee/profile/country/ee/
+exports <- read.csv(file = 'datasets/Exports.csv')
+imports <- read.csv(file = 'datasets/Imports.csv')
+
+#merging 2 tables
+exp_imp <- select(merge(x = exports, y = imports, by = "country_iso3"), country_iso3, Total.x, Total.y)
+
+#calculate total trade turnover (imports + exports)
+exp_imp["Trade_turnover"] <- exp_imp["Total.x"]+exp_imp["Total.y"]
+
+names(exp_imp)[names(exp_imp) == "country_iso3"] <- "iso_a3"
+exp_imp$iso_a3 = toupper(exp_imp$iso_a3)
+
+#country A2/A3 codes from https://www.kaggle.com/datasets/rafiaaa/country-names-with-short-codes-a2-a3-iso?resource=download
+
+country_codes <- read.csv(file = "datasets/country_codes.csv")
+
+names(country_codes)[names(country_codes) == "Alpha.2.code"] <- "iso_a2"
+names(country_codes)[names(country_codes) == "Alpha.3.code"] <- "iso_a3"
+
+#add country names
+estonia_exp_imp <- merge(x = exp_imp, y = country_codes, by = "iso_a3", all.x = TRUE)
+
+estonia_exp_imp["Trade_turnover_mln"] = estonia_exp_imp["Trade_turnover"] / 1000000
+
+
+
+
+#map of trade turnover
+trade_turnover_h_map <- hcmap(map = "custom/world",
+      data = estonia_exp_imp,
+      value = "Trade_turnover_mln",
+      joinBy = c("iso-a3", "iso_a3"),
+      name = "Trade turnover",
+      borderColor = "#FAFAFA",
+      borderWidth = 0.3,
+      nullColor = "#d3d3d3",
+      tooltip = list(
+      valueDecimals = 2,
+      valueSuffix = " mln eur",
+      pointFormat = "{point.name}: <b>{point.value}</b>"
+  )
+      ) %>%
+  hc_colorAxis(dataClasses = color_classes(breaks = c(0, 100, 500, 1000, 3000, 6000),
+                             colors = c("#EBF2F9", "#A6C5E4", "#5792CD", "#2D6297", "#1E4164"))) %>% 
+   hc_legend(
+    title = list(
+        text = "Trade turnover"),
+    layout = "vertical", align = "left",
+    floating = TRUE, valueDecimals = 0, valueSuffix = " mln eur"
+  ) %>%
+  hc_mapNavigation(enabled = TRUE)
+
+trade_turnover_h_map
+
+
+
+#data on regional GDP from Eesti Statistika: https://andmed.stat.ee/en/stat/majandus__rahvamajanduse-arvepidamine__sisemajanduse-koguprodukt-(skp)__regionaalne-sisemajanduse-koguprodukt/RAA0050
+
+regional_gdp <- read.csv(file = 'datasets/regional_GDP.csv')
+
+regional_gdp["r_gdp_rounded"] = round(regional_gdp["GDP_per_capita_eur"],digit=0)
+
+regional_gdp["county_short"] = gsub(' maakond','',regional_gdp$County)
+
+mapdata <- get_data_from_map(download_map_data("countries/ee/ee-all"))
+
+glimpse(mapdata)
+
+regional_gdp_h_map <- hcmap("countries/ee/ee-all",
+      data = regional_gdp,
+      value = "GDP_per_capita_eur",
+      joinBy = c("name", "county_short"),
+      name = "GDP per capita",
+      borderColor = "#FAFAFA",
+      borderWidth = 0.3,
+      nullColor = "#d3d3d3",
+      tooltip = list(
+      valueDecimals = 2,
+      valueSuffix = " eur",
+      pointFormat = "{point.name} county: <b>{point.value}</b>"
+  )
+      ) %>%
+  hc_colorAxis(dataClasses = color_classes(breaks = c(0, 14000, 17000, 23000, 32500),
+                             colors = c("#D5E4F3", "#6FA1D3", "#2D6297", "#17324D"))) %>% 
+   hc_legend(
+    title = list(
+        text = "GDP per capita"),
+    layout = "vertical", align = "left",
+    floating = TRUE, valueDecimals = 0, valueSuffix = " eur"
+  ) %>%
+  hc_mapNavigation(enabled = TRUE)
+
+regional_gdp_h_map
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### GDP growth of Estonia in 1996-2021 {data-height=350}
+```{r}
+GDP_growth_h_linechart
+```
+
+
+### Value added by economic activity in 2021, Estonia {data-height=550}
+```{r}
+value_added_h_plot
+```
+
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### GDP per capita in Estonian regions, 2021
+```{r}
+regional_gdp_h_map
+```
+
+### Trade turnover of Estonia with the other countries in 2021
+```{r}
+trade_turnover_h_map
+```
